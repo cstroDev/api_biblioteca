@@ -7,5 +7,5 @@ export default async function alterarEditoraService(editora, id) {
     let linhasAfetadas = await alterarEditora(editora, id);
 
     if (linhasAfetadas == 0)
-        throw new Error('Nenhuma editora foi alterada.');
+        throw new Error('Nenhuma editora alterada.');
 }
