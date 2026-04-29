@@ -1,24 +1,24 @@
 import con from './connection.js';
 
-export async function inserirEditora(editora) {
+export async function inserirAutor(autor) {
     let comando = `
-        INSERT INTO tb_editoras (nm_nome)
+        INSERT INTO tb_autores (nm_nome)
         VALUES (?)
     `;
 
-    let resposta = await con.query(comando, [editora.nome]);
+    let resposta = await con.query(comando, [autor.nome]);
     let info = resposta[0];
 
     return info.insertId;
 }
 
-export async function consultarEditora() {
+export async function consultarAutor() {
     let comando = `
-        SELECT id_editora      id,
+        SELECT id_autor        id,
                nm_nome         nome,
-               dt_criado_em    criado_em, 
+               dt_criado_em    criado_em,
                dt_alterado_em  alterado_em
-        FROM   tb_editoras 
+        FROM   tb_autores  
     `;
 
     let resposta = await con.query(comando);
@@ -27,14 +27,14 @@ export async function consultarEditora() {
     return registros;
 }
 
-export async function consultarEditoraPorId(id) {
+export async function consultarAutorPorId(id) {
     let comando = `
-        SELECT id_editora      id,
+        SELECT id_autor        id,
                nm_nome         nome,
-               dt_criado_em    criado_em, 
+               dt_criado_em    criado_em,
                dt_alterado_em  alterado_em
-        FROM   tb_editoras
-        WHERE  id_editora = ?
+        FROM   tb_autores
+        WHERE  id_autor = ?
     `;
 
     let resposta = await con.query(comando, [id]);
@@ -43,27 +43,27 @@ export async function consultarEditoraPorId(id) {
     return registros;
 }
 
-export async function alterarEditora(editora, id) {
+export async function alterarAutor(autor, id) {
     let comando = `
-        UPDATE tb_editoras
-        SET    nm_nome = ?
-        WHERE  id_editora = ?
+        UPDATE  tb_autores
+        SET     nm_nome = ?
+        WHERE   id_autor = ?
     `;
 
-    let resposta = await con.query(comando, [editora.nome, id]);
+    let resposta = await con.query(comando, [autor.nome, id]);
     let info = resposta[0];
 
     return info.affectedRows;
 }
 
-export async function deletarEditora(id) {
+export async function deletarAutor(id) {
     let comando = `
-        DELETE FROM tb_editoras
-        WHERE id_editora = ?
+        DELETE FROM tb_autores
+        WHERE id_autor = ?
     `;
 
     let resposta = await con.query(comando, [id]);
     let info = resposta[0];
-    
+
     return info.affectedRows;
 }

@@ -6,5 +6,5 @@ export default async function consultarEditoraPorIdService(id) {
     if (registros.length == 0)
         throw new Error('Nenhuma editora encontrada.');
         
-    return registros;
+    return registros[0];
 }

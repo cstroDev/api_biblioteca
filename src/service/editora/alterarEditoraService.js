@@ -8,6 +8,4 @@ export default async function alterarEditoraService(editora, id) {
 
     if (linhasAfetadas == 0)
         throw new Error('Nenhuma editora foi alterada.');
-
-    return linhasAfetadas;
 }
