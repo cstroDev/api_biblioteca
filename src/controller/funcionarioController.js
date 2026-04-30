@@ -1,6 +1,7 @@
 import inserirFuncionarioService from '../service/funcionario/inserirFuncionarioService.js';
 import loginFuncionarioService from '../service/funcionario/loginFuncionarioService.js';
 import consultarFuncionarioService from '../service/funcionario/consultarFuncionarioService.js';
+import consultarFuncionarioPorIdService from '../service/funcionario/consultarFuncionarioPorIdService.js';
 import alterarFuncionarioService from '../service/funcionario/alterarFuncionarioService.js';
 import deletarFuncionarioService from '../service/funcionario/deletarFuncionarioService.js';
 
@@ -53,7 +54,7 @@ endpoints.get('/funcionarios/:id', async (req, resp) => {
     try {
         let id = req.params.id;
 
-        let registros = consultarFuncionarioPorIdService(id);
+        let registros = await consultarFuncionarioPorIdService(id);
 
         resp.send(registros);
 

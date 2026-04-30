@@ -75,6 +75,9 @@ export async function alterarFuncionario(funcionario, id) {
     `;
 
     let resposta = await con.query(comando, [funcionario.nome, funcionario.email, funcionario.senha, funcionario.cargo, funcionario.ativo, id]);
+    let info = resposta[0];
+
+    return info.affectedRows;
 }
 
 export async function deletarFuncionario(id) {

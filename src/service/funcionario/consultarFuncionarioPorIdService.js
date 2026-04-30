@@ -5,6 +5,6 @@ export default async function consultarFuncionarioPorIdService(id) {
 
     if (registros.length == 0)
         throw new Error('Nenhum funcionário encontrado.');
-
+    
     return registros[0];
 }
