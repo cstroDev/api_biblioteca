@@ -5,6 +5,7 @@ import autorController from './controller/autorController.js';
 import livroController from './controller/livroController.js';
 import usuarioController from './controller/usuarioController.js';
 import funcionarioController from './controller/funcionarioController.js';
+import exemplarController from './controller/exemplarController.js';
 
 export default function adicionarRotas(servidor) {
     servidor.use(categoriaController);
@@ -13,4 +14,5 @@ export default function adicionarRotas(servidor) {
     servidor.use(livroController);
     servidor.use(usuarioController);
     servidor.use(funcionarioController);
+    servidor.use(exemplarController);
 }

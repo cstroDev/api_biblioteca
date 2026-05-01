@@ -9,7 +9,7 @@ export async function inserirLivro(livro) {
     let resposta = await con.query(comando, [livro.categoria, livro.editora, livro.autor, livro.titulo, livro.ano, livro.isbn, livro.sinopse]);
     let info = resposta[0];
 
-    return info.affectedRows;
+    return info.insertId;
 }
 
 export async function consultarLivro() {
