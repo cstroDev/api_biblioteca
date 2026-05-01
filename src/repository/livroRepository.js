@@ -14,18 +14,21 @@ export async function inserirLivro(livro) {
 
 export async function consultarLivro() {
     let comando = `
-        SELECT id_livro        id,
-               id_categoria    idCategoria,
-               id_editora      idEditora,
-               id_autor        idAutor,
-               nm_titulo       titulo,
-               nr_ano          ano,
-               ds_isbn         isbn,
-               ds_sinopse      sinopse,
-               bt_ativo        ativo,
-               dt_criado_em    criado_em,
-               dt_alterado_em  alterado_em
-        FROM   tb_livros
+        SELECT li.id_livro AS id,
+               ca.nm_nome AS categoria,
+               ed.nm_nome AS editora,
+               au.nm_nome AS autor,
+               li.nm_titulo AS titulo,
+               li.nr_ano AS ano,
+               li.ds_isbn AS isbn,
+               li.ds_sinopse AS sinopse,
+               li.bt_ativo AS ativo,
+               li.dt_criado_em AS criado_em,
+               li.dt_alterado_em AS alterado_em
+        FROM   tb_livros li
+        JOIN   tb_categorias ca ON li.id_categoria = ca.id_categoria
+        JOIN   tb_editoras ed ON li.id_editora = ed.id_editora
+        JOIN   tb_autores au ON li.id_autor = au.id_autor
     `;
 
     let resposta = await con.query(comando);
@@ -36,18 +39,21 @@ export async function consultarLivro() {
 
 export async function consultarLivroPorId(id) {
     let comando = `
-        SELECT id_livro        id,
-               id_categoria    idCategoria,
-               id_editora      idEditora,
-               id_autor        idAutor,
-               nm_titulo       titulo,
-               nr_ano          ano,
-               ds_isbn         isbn,
-               ds_sinopse      sinopse,
-               bt_ativo        ativo,
-               dt_criado_em    criado_em,
-               dt_alterado_em  alterado_em
-        FROM   tb_livros
+        SELECT li.id_livro AS id,
+               ca.nm_nome AS categoria,
+               ed.nm_nome AS editora,
+               au.nm_nome AS autor,
+               li.nm_titulo AS titulo,
+               li.nr_ano AS ano,
+               li.ds_isbn AS isbn,
+               li.ds_sinopse AS sinopse,
+               li.bt_ativo AS ativo,
+               li.dt_criado_em AS criado_em,
+               li.dt_alterado_em AS alterado_em
+        FROM   tb_livros li
+        JOIN   tb_categorias ca ON li.id_categoria = ca.id_categoria
+        JOIN   tb_editoras ed ON li.id_editora = ed.id_editora
+        JOIN   tb_autores au ON li.id_autor = au.id_autor
         WHERE  id_livro = ? 
     `;
 

@@ -1,8 +1,8 @@
 import { alterarExemplar } from '../../repository/exemplarRepository.js';
-import { validarCamposObrigatoriosExemplarAlteracao } from '../../validation/exemplar/validarCamposObrigatoriosExemplar.js';
+import { validarCamposObrigatoriosExemplar } from '../../validation/exemplar/validarCamposObrigatoriosExemplar.js';
 
 export default async function alterarExemplarService(exemplar, id) {
-    validarCamposObrigatoriosExemplarAlteracao(exemplar);
+    validarCamposObrigatoriosExemplar(exemplar);
 
     let linhasAfetadas = await alterarExemplar(exemplar, id);
 

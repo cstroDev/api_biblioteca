@@ -2,8 +2,8 @@ import con from './connection.js';
 
 export async function inserirExemplar(exemplar) {
     let comando = `
-        INSERT INTO tb_exemplares (id_livro, ds_codigo)
-        VALUES (?, ?)
+        INSERT INTO tb_exemplares (id_livro, ds_codigo, st_status)
+        VALUES (?, ?, ?)
     `;
 
     let resposta = await con.query(comando, [exemplar.livro, exemplar.codigo, exemplar.status]);
@@ -14,13 +14,14 @@ export async function inserirExemplar(exemplar) {
 
 export async function consultarExemplar() {
     let comando = `
-        SELECT id_exemplar     id,
-               id_livro        idLivro,
-               ds_codigo       codigo,
-               st_status       status,
-               dt_criado_em    criado_em,
-               dt_alterado_em  alterado_em
-        FROM   tb_exemplares
+        SELECT ex.id_exemplar AS id,
+               li.nm_titulo AS livro,
+               ex.ds_codigo AS codigo,
+               ex.st_status AS status,
+               ex.dt_criado_em AS criado_em,
+               ex.dt_alterado_em AS alterado_em
+        FROM   tb_exemplares ex
+        JOIN   tb_livros li ON ex.id_livro = li.id_livro    
     `;
 
     let resposta = await con.query(comando);
@@ -31,17 +32,37 @@ export async function consultarExemplar() {
 
 export async function consultarExemplarPorId(id) {
     let comando = `
-        SELECT id_exemplar     id,
-               id_livro        idLivro,
-               ds_codigo       codigo,
-               st_status       status,
-               dt_criado_em    criado_em,
-               dt_alterado_em  alterado_em
-        FROM   tb_exemplares
+        SELECT ex.id_exemplar AS id,
+               li.nm_titulo AS livro,
+               ex.ds_codigo AS codigo,
+               ex.st_status AS status,
+               ex.dt_criado_em AS criado_em,
+               ex.dt_alterado_em AS alterado_em
+        FROM   tb_exemplares ex
+        JOIN   tb_livros li ON ex.id_livro = li.id_livro
         WHERE  id_exemplar = ?
     `;
 
     let resposta = await con.query(comando, [id]);
+    let registros = resposta[0];
+
+    return registros;
+}
+
+export async function consultarExemplarPorLivro(idLivro) {
+    let comando = `
+        SELECT ex.id_exemplar AS id,
+               li.nm_titulo AS livro,
+               ex.ds_codigo AS codigo,
+               ex.st_status AS status,
+               ex.dt_criado_em AS criado_em,
+               ex.dt_alterado_em AS alterado_em
+        FROM   tb_exemplares ex
+        JOIN   tb_livros li ON ex.id_livro = li.id_livro
+        WHERE  ex.id_livro = ? 
+    `;
+
+    let resposta = await con.query(comando, [idLivro]);
     let registros = resposta[0];
 
     return registros;

@@ -1,6 +1,7 @@
 import inserirExemplarService from '../service/exemplar/inserirExemplarService.js';
 import consultarExemplarService from '../service/exemplar/consultarExemplarService.js';
 import consultarExemplarPorIdService from '../service/exemplar/consultarExemplarPorIdService.js';
+import consultarExemplarPorLivroService from '../service/exemplar/consultarExemplarPorLivroService.js';
 import alterarExemplarService from '../service/exemplar/alterarExemplarService.js';
 import deletarExemplarService from '../service/exemplar/deletarExemplarService.js';
 
@@ -40,6 +41,20 @@ endpoints.get('/exemplares/:id', async (req, resp) => {
         let id = req.params.id;
 
         let registros = await consultarExemplarPorIdService(id);
+
+        resp.send(registros);
+
+    } catch (err) {
+        logErro(err);
+        resp.status(400).send(criarErro(err));
+    }
+});
+
+endpoints.get('/livros/:id/exemplares', async (req, resp) => {
+    try {
+        let idLivro = req.params.id;
+
+        let registros = await consultarExemplarPorLivroService(idLivro);
 
         resp.send(registros);
 
