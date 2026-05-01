@@ -12,4 +12,7 @@ export function validarCamposObrigatoriosExemplarAlteracao(exemplar) {
         
     if (!exemplar.codigo)
         throw new Error('Código do livro é obrigatório.');
+
+    if (!exemplar.status)
+        throw new Error('Status do livro é obrigatório.');
 }
